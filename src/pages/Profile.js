@@ -65,6 +65,8 @@ const Profile = () => {
     company,
   } = userData;
 
+  document.title = `${username} | GitHub Profile`;
+
   return (
     <div>
       <div style={{ backgroundColor: "black", color: "white" }}>

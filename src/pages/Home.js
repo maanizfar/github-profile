@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const Home = () => {
+  document.title = "GitHub Profile";
+
   const [username, setUsername] = useState("");
   const changeHandler = (e) => setUsername(e.target.value);
 
