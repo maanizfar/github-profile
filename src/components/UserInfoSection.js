@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Octicon, { Location, Calendar, Briefcase } from "@primer/octicons-react";
 import { defaultTheme } from "../styles/theme";
