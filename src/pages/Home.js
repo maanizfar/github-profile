@@ -31,12 +31,20 @@ const Form = styled.form`
   svg {
     color: ${colors.purple};
   }
+
+  @media (max-width: 600px) {
+    margin-bottom: 0;
+  }
 `;
 
 const Label = styled.label`
   font-size: 2.5rem;
   margin: 32px;
   font-family: ${fonts.inter};
+
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Input = styled.input`
@@ -49,6 +57,11 @@ const Input = styled.input`
   font-family: ${fonts.mono};
   background-color: ${colors.gray};
   color: ${colors.lightPurple};
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
 `;
 
 const ErrorText = styled.p`
