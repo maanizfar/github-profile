@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 import { getUserData } from "../utils/Data";
 import styled from "styled-components";
 import Octicon, { MarkGithub } from "@primer/octicons-react";
+
+import Loadingbar from "react-colored-loading-bar";
+
 import { mixins } from "../styles/mixins";
 import { defaultTheme } from "../styles/theme";
 const { colors, fonts } = defaultTheme;
@@ -57,6 +60,7 @@ const Home = () => {
 
   const [username, setUsername] = useState("");
   const [error, setError] = useState({ active: false, type: 200, text: "OK" });
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
   const changeHandler = (e) => setUsername(e.target.value);
@@ -64,10 +68,15 @@ const Home = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     getUserData(
       username,
       () => history.push(`/${username}`),
-      (type, text) => setError({ active: true, type, text })
+      (type, text) => {
+        setError({ active: true, type, text });
+        setIsLoading(false);
+      }
     );
   };
 
@@ -79,6 +88,15 @@ const Home = () => {
 
   return (
     <Container>
+      {isLoading && (
+        <Loadingbar
+          colors={[colors.yellow, colors.purple, colors.green, colors.red]}
+          height={5}
+          cycleDurationInMs={200}
+          positionAtTop={true}
+        ></Loadingbar>
+      )}
+
       <Form onSubmit={submitHandler}>
         <Octicon icon={MarkGithub} size="large" />
         <Label htmlFor="username">Find A Profile</Label>
