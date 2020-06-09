@@ -4,7 +4,7 @@ import { getUserData } from "../utils/Data";
 import styled from "styled-components";
 import Octicon, { MarkGithub } from "@primer/octicons-react";
 
-import Loadingbar from "react-colored-loading-bar";
+import LoadingBar from "../components/LoadingBar";
 
 import { mixins } from "../styles/mixins";
 import { defaultTheme } from "../styles/theme";
@@ -88,14 +88,7 @@ const Home = () => {
 
   return (
     <Container>
-      {isLoading && (
-        <Loadingbar
-          colors={[colors.yellow, colors.purple, colors.green, colors.red]}
-          height={5}
-          cycleDurationInMs={200}
-          positionAtTop={true}
-        ></Loadingbar>
-      )}
+      {isLoading && <LoadingBar />}
 
       <Form onSubmit={submitHandler}>
         <Octicon icon={MarkGithub} size="large" />
