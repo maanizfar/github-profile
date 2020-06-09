@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUserData, getReposData, getLangData } from "../utils/Data";
+// import {
+//   userData as mockUserData,
+//   reposData as mockReposData,
+//   langData as mockLangData,
+// } from "../utils/mockData";
+import LoadingBar from "../components/LoadingBar";
+// import styled from "styled-components";
+// import Octicon from "@primer/octicons-react";
+// import { defaultTheme } from "../styles/theme";
+// import { mixins } from "../styles/mixins";
+
+import UserInfoSection from "../components/UserInfoSection";
+// import RepoSection from "../components/RepoSection";
 
 const Profile = () => {
   const { username } = useParams();
@@ -30,46 +43,15 @@ const Profile = () => {
   }
 
   if (userData === null || reposData === null || langData === null) {
-    return <div>loading...</div>;
+    return <LoadingBar />;
   }
 
   document.title = `${username} | GitHub Profile`;
 
-  const {
-    name,
-    avatar_url,
-    followers,
-    following,
-    created_at,
-    html_url: profile_url,
-    location,
-    public_repos,
-    company,
-  } = userData;
-
   return (
     <div>
-      <div style={{ backgroundColor: "black", color: "white" }}>
-        <h1>Name: {name}</h1>
-        <img src={avatar_url} alt={`${name}'s avatar`} height={230} />
-        <div>
-          <a href={profile_url}>@{username}</a>
-        </div>
-        <p>Followers: {followers}</p>
-        <p>Following: {following}</p>
-        <p>
-          Joined:{" "}
-          {new Date(created_at).toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </p>
-        <p>Location: {location}</p>
-        <p>Company: {company}</p>
-        <p>Repos: {public_repos}</p>
-      </div>
-      <div style={{ backgroundColor: "black", color: "white" }}>
+      <UserInfoSection username={username} userData={userData} />
+      {/* <div style={{ backgroundColor: "black", color: "white" }}>
         {langData.map((lang) => (
           <div key={lang.label}>
             <p style={{ color: lang.color }}>
@@ -77,7 +59,8 @@ const Profile = () => {
             </p>
           </div>
         ))}
-      </div>
+      </div> 
+      <RepoSection />
       <div style={{ backgroundColor: "black", color: "white" }}>
         {reposData.map((repo) => {
           return (
@@ -90,7 +73,7 @@ const Profile = () => {
             </div>
           );
         })}
-      </div>
+      </div>*/}
     </div>
   );
 };
