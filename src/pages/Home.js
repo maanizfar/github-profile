@@ -1,6 +1,56 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { getUserData } from "../utils/Data";
+import styled from "styled-components";
+import Octicon, { MarkGithub } from "@primer/octicons-react";
+import { mixins } from "../styles/mixins";
+import { defaultTheme } from "../styles/theme";
+const { colors, fonts } = defaultTheme;
+
+const Container = styled.div`
+  ${mixins.flexCenter};
+  height: 100vh;
+  background-color: ${colors.darkGray};
+  background-image: radial-gradient(
+    ${colors.darkGray} 0%,
+    ${colors.black} 100%
+  );
+  color: ${colors.white};
+`;
+
+const Form = styled.form`
+  ${mixins.flexCenter}
+  flex-direction: column;
+  padding: 32px;
+  max-width: 600px;
+  margin-bottom: 20vh;
+  text-align: center;
+  svg {
+    color: ${colors.purple};
+  }
+`;
+
+const Label = styled.label`
+  font-size: 2.5rem;
+  margin: 32px;
+  font-family: ${fonts.inter};
+`;
+
+const Input = styled.input`
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-family: ${fonts.mono};
+  background-color: ${colors.gray};
+  color: ${colors.lightPurple};
+`;
+
+const ErrorText = styled.p`
+  color: ${colors.red};
+`;
 
 const Home = () => {
   document.title = "GitHub Profile";
@@ -28,19 +78,23 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={submitHandler}>
-        <label htmlFor="username">Find a profile</label>
-        <input
+    <Container>
+      <Form onSubmit={submitHandler}>
+        <Octicon icon={MarkGithub} size="large" />
+        <Label htmlFor="username">Find A Profile</Label>
+        <Input
           type="text"
           name="username"
           id="username"
           onChange={changeHandler}
           onInput={clearError}
         />
-        {error.active && <p>{username + " " + error.text.toLowerCase()}.</p>}
-      </form>
-    </div>
+
+        <ErrorText>
+          {error.active ? username + " " + error.text.toLowerCase() : ""}
+        </ErrorText>
+      </Form>
+    </Container>
   );
 };
 
