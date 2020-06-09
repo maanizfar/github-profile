@@ -13,7 +13,7 @@ import LoadingBar from "../components/LoadingBar";
 // import { mixins } from "../styles/mixins";
 
 import UserInfoSection from "../components/UserInfoSection";
-// import RepoSection from "../components/RepoSection";
+import RepoSection from "../components/RepoSection";
 
 const Profile = () => {
   const { username } = useParams();
@@ -23,6 +23,10 @@ const Profile = () => {
   const [error, setError] = useState({ active: false, type: 200, text: "OK" });
 
   useEffect(() => {
+    // setUserData(mockUserData);
+    // setReposData(mockReposData);
+    // setLangData(mockLangData);
+
     getUserData(username, setUserData, (type, text) =>
       setError({ active: true, type, text })
     );
@@ -51,6 +55,7 @@ const Profile = () => {
   return (
     <div>
       <UserInfoSection username={username} userData={userData} />
+      <RepoSection data={reposData} />
       {/* <div style={{ backgroundColor: "black", color: "white" }}>
         {langData.map((lang) => (
           <div key={lang.label}>
@@ -60,7 +65,6 @@ const Profile = () => {
           </div>
         ))}
       </div> 
-      <RepoSection />
       <div style={{ backgroundColor: "black", color: "white" }}>
         {reposData.map((repo) => {
           return (

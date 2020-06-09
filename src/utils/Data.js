@@ -8,7 +8,7 @@ export const getUserData = (username, successCallback, errorCallback) => {
 };
 
 export const getReposData = (username, successCallback, errorCallback) => {
-  const url = baseUrl + username + "/repos";
+  const url = baseUrl + username + "/repos?per_page=100";
   getData(url, successCallback, errorCallback);
 };
 
