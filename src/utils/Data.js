@@ -21,6 +21,7 @@ const getData = (url, successCallback, errorCallback) => {
       return res.json();
     })
     .then((json) => {
+      if (json === undefined) return;
       successCallback(json);
     })
     .catch((err) => {
