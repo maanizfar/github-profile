@@ -1,57 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import {
-//   userData as mockUserData,
-//   reposData as mockReposData,
-//   langData as mockLangData,
-// } from "../utils/mockData";
-import GhPolyglot from "gh-polyglot";
+import { getUserData, getReposData, getLangData } from "../utils/Data";
 
 const Profile = () => {
   const { username } = useParams();
   const [userData, setUserData] = useState(null);
   const [reposData, setReposData] = useState(null);
   const [langData, setLangData] = useState(null);
-  const [error, setError] = useState({ active: false, type: 200 });
+  const [error, setError] = useState({ active: false, type: 200, text: "OK" });
 
   useEffect(() => {
-    getData(`https://api.github.com/users/${username}`, setUserData);
-    getData(`https://api.github.com/users/${username}/repos`, setReposData);
-    getLangData(`${username}`);
+    getUserData(username, setUserData, (type, text) =>
+      setError({ active: true, type, text })
+    );
+    getReposData(username, setReposData, (type, text) =>
+      setError({ active: true, type, text })
+    );
+    getLangData(username, setLangData, (type, text) =>
+      setError({ active: true, type, text })
+    );
   }, [username]);
 
-  const getLangData = (username) => {
-    const me = new GhPolyglot(username);
-    me.userStats((err, stats) => {
-      if (err) {
-        console.log(err);
-      }
-      console.log(JSON.stringify(stats));
-      setLangData(stats);
-    });
-  };
-
-  const getData = (url, callback) => {
-    fetch(url)
-      .then((res) => {
-        if (res.status !== 200) {
-          return setError({ active: true, type: res.status });
-        }
-        return res.json();
-      })
-      .then((json) => {
-        callback(json);
-        // console.log(json);
-      });
-  };
-
   if (error.active === true) {
-    return <p>Error: {error.type}</p>;
+    return (
+      <p>
+        Error: {error.type}, {error.text}
+      </p>
+    );
   }
 
   if (userData === null || reposData === null || langData === null) {
     return <div>loading...</div>;
   }
+
+  document.title = `${username} | GitHub Profile`;
 
   const {
     name,
@@ -64,8 +46,6 @@ const Profile = () => {
     public_repos,
     company,
   } = userData;
-
-  document.title = `${username} | GitHub Profile`;
 
   return (
     <div>
