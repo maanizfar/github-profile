@@ -55,7 +55,7 @@ const Profile = () => {
   return (
     <div>
       <UserInfoSection username={username} userData={userData} />
-      <RepoSection data={reposData} />
+      <RepoSection data={reposData} langData={langData} />
       {/* <div style={{ backgroundColor: "black", color: "white" }}>
         {langData.map((lang) => (
           <div key={lang.label}>
@@ -64,20 +64,7 @@ const Profile = () => {
             </p>
           </div>
         ))}
-      </div> 
-      <div style={{ backgroundColor: "black", color: "white" }}>
-        {reposData.map((repo) => {
-          return (
-            <div key={repo.id}>
-              <h1>{repo.name}</h1>
-              <p>Description: {repo.description}</p>
-              <p>Language: {repo.language}</p>
-              <p>Forks: {repo.forks_count}</p>
-              <p>Stars: {repo.stargazers_count}</p>
-            </div>
-          );
-        })}
-      </div>*/}
+      </div> */}
     </div>
   );
 };

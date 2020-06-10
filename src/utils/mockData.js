@@ -71,7 +71,7 @@ export const reposData = [
     },
     html_url: "https://github.com/ry/awesome-deno",
     description: "🎉A curated list of awesome things related to Deno",
-    fork: true,
+    fork: false,
     url: "https://api.github.com/repos/ry/awesome-deno",
     forks_url: "https://api.github.com/repos/ry/awesome-deno/forks",
     keys_url: "https://api.github.com/repos/ry/awesome-deno/keys{/key_id}",
@@ -180,7 +180,7 @@ export const reposData = [
     html_url: "https://github.com/ry/aws-appsync-chat",
     description:
       "Real-Time Offline Ready Chat App written with GraphQL, AWS AppSync, & AWS Amplify",
-    fork: true,
+    fork: false,
     url: "https://api.github.com/repos/ry/aws-appsync-chat",
     forks_url: "https://api.github.com/repos/ry/aws-appsync-chat/forks",
     keys_url: "https://api.github.com/repos/ry/aws-appsync-chat/keys{/key_id}",
