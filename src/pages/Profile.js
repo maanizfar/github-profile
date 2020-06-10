@@ -7,13 +7,10 @@ import { getUserData, getReposData, getLangData } from "../utils/Data";
 //   langData as mockLangData,
 // } from "../utils/mockData";
 import LoadingBar from "../components/LoadingBar";
-// import styled from "styled-components";
-// import Octicon from "@primer/octicons-react";
-// import { defaultTheme } from "../styles/theme";
-// import { mixins } from "../styles/mixins";
 
 import UserInfoSection from "../components/UserInfoSection";
 import RepoSection from "../components/RepoSection";
+import ChartSection from "../components/ChartSection";
 
 const Profile = () => {
   const { username } = useParams();
@@ -55,16 +52,8 @@ const Profile = () => {
   return (
     <div>
       <UserInfoSection username={username} userData={userData} />
+      <ChartSection langData={langData} repoData={reposData} />
       <RepoSection data={reposData} langData={langData} />
-      {/* <div style={{ backgroundColor: "black", color: "white" }}>
-        {langData.map((lang) => (
-          <div key={lang.label}>
-            <p style={{ color: lang.color }}>
-              {lang.label}: {lang.value}
-            </p>
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 };
